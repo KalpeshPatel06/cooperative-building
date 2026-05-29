@@ -1,13 +1,22 @@
-const windows = document.querySelectorAll('.window');
+const scene = new THREE.Scene();
 
-setInterval(() => {
-  windows.forEach(windowBox => {
-    const random = Math.random();
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
-    if (random > 0.5) {
-      windowBox.classList.add('active');
-    } else {
-      windowBox.classList.remove('active');
-    }
-  });
-}, 1500);
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector('#bg'),
+  antialias: true,
+});
+
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+camera.position.setZ(25);
+
+// Lights
+const pointLight = new THREE.PointLight(0xffffff, 2);
+pointLight.
